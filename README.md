@@ -18,16 +18,16 @@
 
 ---
 
-## Team details (fill in before you start)
+## Team details
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Aayush Ray | 2501010009 | [millimeow](https://github.com/millimeow) |
+| Member 2 | Deeksha Agrawal | 2501010133 | [deekshaagrawal1](https://github.com/deekshaagrawal1) |
+| Member 3 | Prakhar Yadav | 2501010703 | [rakshak7879-bit](https://github.com/rakshak7879-bit) |
+| Member 4 | Arundhati Singh | 2501010577 | [arundhatis25577-avg](https://github.com/arundhatis25577-avg) |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0077 · **Section:** A · **Repository URL:** https://github.com/deekshaagrawal1/DE_Project_2026
 
 ---
 
