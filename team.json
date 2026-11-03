@@ -1,0 +1,27 @@
+{
+  "team_number": "T0077",
+  "group_lead": {
+    "name": "Aayush Ray",
+    "enrollment_no": "2501010009",
+    "github": "millimeow"
+  },
+  "members": [
+    {
+      "name": "Deeksha Agrawal",
+      "enrollment_no": "2501010133",
+      "github": "deekshaagrawal1"
+    },
+    {
+      "name": "Prakhar Yadav",
+      "enrollment_no": "2501010703",
+      "github": "rakshak7879-bit"
+    },
+    {
+      "name": "Arundhati Singh",
+      "enrollment_no": "2501010577",
+      "github": "arundhatis25577-avg"
+    }
+  ],
+  "postgres_version": "",
+  "laptop_used_for_benchmarks": "MacBook Pro M4 Pro"
+}
