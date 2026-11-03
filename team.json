@@ -19,9 +19,9 @@
     {
       "name": "Arundhati Singh",
       "enrollment_no": "2501010577",
-      "github": "arundhatis25577-avg"
+      "github": "arundhatis25577-svg"
     }
   ],
-  "postgres_version": "",
+  "postgres_version": "18.4",
   "laptop_used_for_benchmarks": "MacBook Pro M4 Pro"
 }
