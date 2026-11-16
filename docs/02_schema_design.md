@@ -1,160 +1,290 @@
 # Duolingo Language Learning Database
-## Phase 2 — Schema Design
+## Schema Design
 
 **Team:** T0077 | Section A  
 **Database:** PostgreSQL 18.4  
 **Schema:** `duolingo`
 
----
-
 ## 1. Database Overview
 
-The Duolingo Language Learning Database consists of 11 related tables that store information about languages, courses, learners, lessons, daily activity, leagues and achievements.
+The Duolingo Language Learning Database manages language courses, learner profiles, enrollments, lesson progress, daily activity, weekly leagues, and achievements.
 
-The database follows a relational structure in which tables are connected through primary and foreign keys. This helps maintain data consistency, reduces unnecessary duplication and allows related information to be retrieved using SQL queries.
+The database consists of 11 relational tables connected through primary and foreign keys. The design supports learner progress tracking, leaderboard rankings, referral management, and learning activity reports.
 
-The original CSV column names are preserved to maintain compatibility with the provided SQL workload.
+The schema preserves the column names from the provided dataset to support the existing 30-query SQL workload.
 
-## 2. Table Structure
+## 2. Tables and Attributes
 
-| Table | Purpose | Primary Key |
-|---|---|---|
-| `languages` | Stores available languages | `language_code` |
-| `courses` | Stores language courses | `course_id` |
-| `units` | Stores units within courses | `unit_id` |
-| `lessons` | Stores lessons within units | `lesson_id` |
-| `learners` | Stores learner profiles | `learner_id` |
-| `enrollments` | Connects learners with courses | `(learner_id, course_id)` |
-| `lesson_attempts` | Records lesson attempts and XP | `attempt_id` |
-| `daily_activity` | Stores daily learning activity | `(learner_id, activity_date)` |
-| `league_memberships` | Stores weekly league participation | `(learner_id, week_start)` |
-| `achievements` | Stores achievement details | `achievement_id` |
-| `learner_achievements` | Records achievements earned by learners | `(learner_id, achievement_id)` |
+### 2.1 languages
 
-### Column Definitions
+Stores information about the languages available on the platform.
 
-| Table | Columns and Data Types |
+| Column | Description |
 |---|---|
-| `languages` | `language_code VARCHAR(2)`, `language_name VARCHAR(60)` |
-| `courses` | `course_id INTEGER`, `from_lang VARCHAR(2)`, `learning_lang VARCHAR(2)`, `title VARCHAR(150)`, `launched_on DATE` |
-| `units` | `unit_id INTEGER`, `course_id INTEGER`, `unit_no SMALLINT`, `title VARCHAR(150)`, `cefr_level VARCHAR(2)` |
-| `lessons` | `lesson_id INTEGER`, `unit_id INTEGER`, `lesson_no SMALLINT`, `lesson_type VARCHAR(12)`, `xp_value SMALLINT` |
-| `learners` | `learner_id INTEGER`, `username VARCHAR(100)`, `email VARCHAR(254)`, `country_code VARCHAR(2)`, `daily_goal_xp SMALLINT`, `subscription VARCHAR(10)`, `referred_by INTEGER`, `joined_at TIMESTAMPTZ` |
-| `enrollments` | `learner_id INTEGER`, `course_id INTEGER`, `enrolled_at TIMESTAMPTZ`, `total_xp INTEGER`, `is_active BOOLEAN` |
-| `lesson_attempts` | `attempt_id INTEGER`, `learner_id INTEGER`, `lesson_id INTEGER`, `started_at TIMESTAMPTZ`, `completed_at TIMESTAMPTZ`, `mistakes SMALLINT`, `hearts_lost SMALLINT`, `xp_earned SMALLINT`, `is_perfect BOOLEAN`, `device VARCHAR(10)` |
-| `daily_activity` | `learner_id INTEGER`, `activity_date DATE`, `xp INTEGER`, `lessons_completed SMALLINT`, `used_streak_freeze BOOLEAN` |
-| `league_memberships` | `learner_id INTEGER`, `week_start DATE`, `tier VARCHAR(12)`, `cohort_id INTEGER`, `weekly_xp INTEGER`, `final_rank SMALLINT`, `result VARCHAR(10)` |
-| `achievements` | `achievement_id INTEGER`, `code VARCHAR(40)`, `name VARCHAR(100)` |
-| `learner_achievements` | `learner_id INTEGER`, `achievement_id INTEGER`, `earned_at TIMESTAMPTZ` |
+| `language_code` | Primary key; unique language code |
+| `language_name` | Language name; unique |
 
-The schema uses integer types for numeric values, VARCHAR for text, BOOLEAN for true/false values, and DATE or TIMESTAMPTZ for dates and timestamps.
+### 2.2 courses
 
-## 3. Keys and Relationships
+Stores language courses available to learners.
 
-### Primary and Candidate Keys
+| Column | Description |
+|---|---|
+| `course_id` | Primary key |
+| `from_lang` | Foreign key referencing `languages` |
+| `learning_lang` | Foreign key referencing `languages` |
+| `title` | Course title |
+| `launched_on` | Course launch date |
 
-Primary keys uniquely identify records in each table. Composite primary keys are used where two columns together identify a record.
+The combination of `from_lang` and `learning_lang` is unique.
 
-Examples include:
+### 2.3 units
 
-- `learner_id` in `learners`
-- `course_id` in `courses`
-- `(learner_id, course_id)` in `enrollments`
-- `(learner_id, activity_date)` in `daily_activity`
+Stores units belonging to different courses.
 
-Additional candidate keys include `learners.username`, `learners.email` and `achievements.code`, which are maintained as UNIQUE and NOT NULL.
+| Column | Description |
+|---|---|
+| `unit_id` | Primary key |
+| `course_id` | Foreign key referencing `courses` |
+| `unit_no` | Unit number within the course |
+| `title` | Unit title |
+| `cefr_level` | Language proficiency level |
 
-### Foreign Keys
+The combination of `course_id` and `unit_no` is unique.
 
-| Table | Foreign Key | References |
+### 2.4 lessons
+
+Stores individual lessons within course units.
+
+| Column | Description |
+|---|---|
+| `lesson_id` | Primary key |
+| `unit_id` | Foreign key referencing `units` |
+| `lesson_no` | Lesson number within the unit |
+| `lesson_type` | Type of lesson |
+| `xp_value` | XP awarded for the lesson |
+
+The combination of `unit_id` and `lesson_no` is unique.
+
+### 2.5 learners
+
+Stores learner profiles, account details, subscriptions, and referrals.
+
+| Column | Description |
+|---|---|
+| `learner_id` | Primary key |
+| `username` | Unique learner username |
+| `email` | Unique email address |
+| `country_code` | Learner's country code |
+| `daily_goal_xp` | Daily XP target |
+| `subscription` | Subscription category |
+| `referred_by` | Foreign key referencing `learners`; nullable |
+| `joined_at` | Account creation timestamp |
+
+The `referred_by` column references the same table because learners can refer other learners.
+
+### 2.6 enrollments
+
+Stores learner enrollments in language courses.
+
+| Column | Description |
+|---|---|
+| `learner_id` | Foreign key referencing `learners` |
+| `course_id` | Foreign key referencing `courses` |
+| `enrolled_at` | Enrollment timestamp |
+| `total_xp` | Total XP earned in the course |
+| `is_active` | Enrollment status |
+
+The combination of `learner_id` and `course_id` forms a composite primary key.
+
+### 2.7 lesson_attempts
+
+Records lesson attempts and learning performance.
+
+| Column | Description |
+|---|---|
+| `attempt_id` | Primary key |
+| `learner_id` | Foreign key referencing `learners` |
+| `lesson_id` | Foreign key referencing `lessons` |
+| `started_at` | Attempt start timestamp |
+| `completed_at` | Completion timestamp; nullable |
+| `mistakes` | Number of mistakes |
+| `hearts_lost` | Hearts lost during the attempt |
+| `xp_earned` | XP earned |
+| `is_perfect` | Whether the attempt was perfect |
+| `device` | Device used for the attempt |
+
+A NULL `completed_at` represents an unfinished lesson attempt.
+
+### 2.8 daily_activity
+
+Stores daily activity summaries for learners.
+
+| Column | Description |
+|---|---|
+| `learner_id` | Foreign key referencing `learners` |
+| `activity_date` | Activity date |
+| `xp` | XP earned that day |
+| `lessons_completed` | Number of completed lessons |
+| `used_streak_freeze` | Whether a streak freeze was used |
+
+The combination of `learner_id` and `activity_date` forms the primary key.
+
+### 2.9 league_memberships
+
+Stores learner participation in weekly leagues.
+
+| Column | Description |
+|---|---|
+| `learner_id` | Foreign key referencing `learners` |
+| `week_start` | Start date of the league week |
+| `tier` | League category |
+| `cohort_id` | League group identifier |
+| `weekly_xp` | XP earned during the week |
+| `final_rank` | Final leaderboard position; nullable |
+| `result` | League outcome; nullable |
+
+The combination of `learner_id` and `week_start` forms the primary key.
+
+### 2.10 achievements
+
+Stores achievements available on the platform.
+
+| Column | Description |
+|---|---|
+| `achievement_id` | Primary key |
+| `code` | Unique achievement code |
+| `name` | Achievement name |
+
+### 2.11 learner_achievements
+
+Records achievements earned by learners.
+
+| Column | Description |
+|---|---|
+| `learner_id` | Foreign key referencing `learners` |
+| `achievement_id` | Foreign key referencing `achievements` |
+| `earned_at` | Timestamp when the achievement was earned |
+
+The combination of `learner_id` and `achievement_id` forms the primary key.
+
+## 3. Data Types and Keys
+
+The PostgreSQL schema uses the following data types:
+
+| Data Type | Usage |
+|---|---|
+| `INTEGER` | IDs, XP totals, and numeric counters |
+| `SMALLINT` | Small numeric values such as lesson numbers and mistakes |
+| `VARCHAR` | Names, codes, categories, and email addresses |
+| `BOOLEAN` | True/false values |
+| `DATE` | Calendar dates |
+| `TIMESTAMPTZ` | Timestamps for learner and activity events |
+
+**Primary keys** uniquely identify records, while **foreign keys** connect records across tables.
+
+Examples of candidate keys include `learners.username`, `learners.email`, and `achievements.code`. Composite primary keys are used in `enrollments`, `daily_activity`, `league_memberships`, and `learner_achievements`.
+
+The exact column types and constraints are defined in `sql/01_schema.sql`.
+
+## 4. Relationships and Cardinality
+
+| Relationship | Cardinality | Explanation |
 |---|---|---|
-| `courses` | `from_lang`, `learning_lang` | `languages.language_code` |
-| `units` | `course_id` | `courses.course_id` |
-| `lessons` | `unit_id` | `units.unit_id` |
-| `learners` | `referred_by` | `learners.learner_id` |
-| `enrollments` | `learner_id`, `course_id` | `learners`, `courses` |
-| `lesson_attempts` | `learner_id`, `lesson_id` | `learners`, `lessons` |
-| `daily_activity` | `learner_id` | `learners.learner_id` |
-| `league_memberships` | `learner_id` | `learners.learner_id` |
-| `learner_achievements` | `learner_id`, `achievement_id` | `learners`, `achievements` |
+| Languages – Courses | One-to-many | One language can be associated with multiple courses |
+| Courses – Units | One-to-many | One course contains multiple units |
+| Units – Lessons | One-to-many | One unit contains multiple lessons |
+| Learners – Enrollments | One-to-many | One learner can have multiple enrollments |
+| Courses – Enrollments | One-to-many | One course can have multiple enrolled learners |
+| Learners – Lesson Attempts | One-to-many | One learner can attempt multiple lessons |
+| Lessons – Lesson Attempts | One-to-many | One lesson can have multiple attempts |
+| Learners – Daily Activity | One-to-many | One learner can have multiple daily activity records |
+| Learners – League Memberships | One-to-many | One learner can participate in multiple weekly leagues |
+| Learners – Learners | One-to-many | One learner can refer multiple other learners |
+| Learners – Learner Achievements | One-to-many | One learner can earn multiple achievements |
+| Achievements – Learner Achievements | One-to-many | One achievement can be earned by multiple learners |
 
-### Relationship Cardinality
+The `enrollments` and `learner_achievements` tables also implement many-to-many relationships between learners and courses, and learners and achievements.
 
-The main relationships are:
+## 5. Important Design Decisions
 
-- One language can be used in multiple courses.
-- One course contains multiple units.
-- One unit contains multiple lessons.
-- One learner can make multiple lesson attempts.
-- One learner can have multiple daily activity records.
-- Learners and courses have a many-to-many relationship through `enrollments`.
-- Learners and achievements have a many-to-many relationship through `learner_achievements`.
+**Course hierarchy:** Courses, units, and lessons are stored separately to maintain a clear learning structure.
+
+**Multiple enrollments:** The `enrollments` table allows learners to join different courses without duplicating learner details.
+
+**Repeated lesson attempts:** `lesson_attempts` stores individual attempts because a learner may attempt the same lesson more than once.
+
+**Incomplete lessons:** `completed_at` is nullable to represent attempts that were started but not completed.
+
+**Referral management:** `referred_by` is a nullable, self-referencing foreign key. This supports referral queries, including identifying learners who have not referred anyone.
+
+**Daily activity tracking:** `daily_activity` stores XP and completed lesson counts for each learner and date.
+
+**Weekly leaderboards:** `league_memberships` stores league tiers, weekly XP, rankings, and outcomes separately from learner profiles.
+
+**Achievements:** `learner_achievements` connects learners with achievements and prevents duplicate learner-achievement combinations.
+
+## 6. Integrity Constraints
+
+The SQL schema uses PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL, and CHECK constraints.
+
+Important validation rules include:
+
+1. Language codes must follow the required format.
+2. Source and learning languages must differ.
+3. Unit and lesson numbers must be positive.
+4. Lesson XP values must be positive.
+5. Lesson types must use allowed categories.
+6. Daily XP goals must use valid values.
+7. Subscription types must use allowed categories.
+8. Learners cannot refer themselves.
+9. Enrollment XP cannot be negative.
+10. Mistakes and hearts lost cannot be negative.
+11. Earned XP cannot be negative.
+12. Lesson completion time cannot precede start time.
+13. Daily XP and completed lesson counts cannot be negative.
+14. Weekly league XP cannot be negative.
+15. League ranks and results must follow valid ranges and categories.
+
+These rules provide the basis for the required minimum of 12 CHECK constraints. The SQL implementation must use rules compatible with the supplied data.
 
 ### Referential Integrity
 
-Foreign keys ensure that records reference existing entries in related tables.
+Foreign keys prevent records from referencing nonexistent parent records.
 
-The schema uses the following delete rules:
+The proposed delete rules are:
 
-- **RESTRICT:** Prevents deletion of referenced languages, courses, units, lessons and achievement definitions.
-- **CASCADE:** Deletes dependent learner records, such as enrollments and activity, when their parent learner is deleted.
-- **SET NULL:** Clears `referred_by` if the referenced learner is deleted.
+- **RESTRICT:** For referenced language, course, unit, lesson, and achievement records.
+- **CASCADE:** For dependent learner activity and enrollment records.
+- **SET NULL:** For `learners.referred_by` when the referring learner is deleted.
 
-Foreign-key updates use the default `NO ACTION` behaviour, preventing changes that leave invalid references.
+Changes to referenced keys must also preserve valid foreign-key relationships.
 
-## 4. Integrity Constraints
+### Nullable Fields
 
-Primary keys, foreign keys, UNIQUE, NOT NULL and CHECK constraints are used to maintain valid data.
+The following attributes allow NULL values:
 
-The planned CHECK constraints include:
+- `learners.referred_by`
+- `lesson_attempts.completed_at`
+- `league_memberships.final_rank`
+- `league_memberships.result`
 
-| Table | Constraints |
-|---|---|
-| `languages` | Language code must contain two lowercase letters |
-| `courses` | Source and learning languages must differ |
-| `units` | Unit number must be positive; CEFR level must be valid |
-| `lessons` | Lesson number and XP must be positive; lesson type must be valid |
-| `learners` | Daily goal and subscription must use allowed values; self-referrals are not allowed |
-| `enrollments` | Total XP cannot be negative |
-| `lesson_attempts` | Mistakes, hearts lost and XP cannot be negative; completion time cannot precede start time; perfect attempts cannot contain mistakes |
-| `daily_activity` | XP and completed lessons cannot be negative |
-| `league_memberships` | Weekly XP cannot be negative; final rank must be between 1 and 30; league result must use an allowed value |
+Other attributes are intended to be NOT NULL.
 
-**Allowed values:**
+## 7. Normalization and Functional Dependencies
 
-- Subscription: `FREE`, `SUPER`, `MAX`
-- Lesson type: `LEARN`, `PRACTICE`, `STORY`, `LEGENDARY`
-- Daily goal XP: `10`, `20`, `30`, `50`
-- CEFR level: `A1`, `A2`, `B1`, `B2`, `C1`
-- League result: `PROMOTED`, `DEMOTED`, `STAYED`
+The database separates related information into individual tables to reduce unnecessary duplication.
 
-At least 12 CHECK constraints will be defined in `sql/01_schema.sql`. Their compatibility with the CSV data must be verified during loading.
+The design follows **1NF, 2NF, and 3NF**, with BCNF considered using the identified functional dependencies.
 
-### NULL Handling
+- **1NF:** Each attribute contains a single value.
+- **2NF:** Non-key attributes depend on the complete primary key.
+- **3NF:** Non-key attributes do not depend on other non-key attributes.
+- **BCNF:** Every identified determinant is a candidate key.
 
-The following columns allow NULL values:
+For example, `enrollments` stores learner-course relationships without repeating learner profiles or course details.
 
-| Column | Reason |
-|---|---|
-| `learners.referred_by` | Not every learner has a referrer |
-| `lesson_attempts.completed_at` | Some lesson attempts are unfinished |
-| `league_memberships.final_rank` | Ranking may not be finalized |
-| `league_memberships.result` | League outcome may be pending |
-
-All other columns are intended to be NOT NULL.
-
-## 5. Normalization
-
-The database separates related information into individual tables to reduce duplication and maintain consistency.
-
-- **1NF:** Each column contains a single value.
-- **2NF:** Non-key columns depend on the complete primary key.
-- **3NF:** Non-key columns do not depend on other non-key columns.
-- **BCNF:** Based on the identified dependencies, determinants are candidate keys.
-
-For example, learner details are stored only in `learners`, while enrollments store the relationship between learners and courses. Similarly, achievement details are stored in `achievements` instead of being repeated for every learner.
-
-### Functional Dependencies
+### Main Functional Dependencies
 
 | Table | Functional Dependency |
 |---|---|
@@ -164,67 +294,59 @@ For example, learner details are stored only in `learners`, while enrollments st
 | `lessons` | `lesson_id → unit_id, lesson_no, lesson_type, xp_value` |
 | `learners` | `learner_id → username, email, country_code, daily_goal_xp, subscription, referred_by, joined_at` |
 | `enrollments` | `(learner_id, course_id) → enrolled_at, total_xp, is_active` |
-| `lesson_attempts` | `attempt_id → all remaining attributes` |
+| `lesson_attempts` | `attempt_id → remaining attempt attributes` |
 | `daily_activity` | `(learner_id, activity_date) → xp, lessons_completed, used_streak_freeze` |
 | `league_memberships` | `(learner_id, week_start) → tier, cohort_id, weekly_xp, final_rank, result` |
 | `achievements` | `achievement_id → code, name` |
 | `learner_achievements` | `(learner_id, achievement_id) → earned_at` |
 
-Stored XP summaries are retained because they are part of the dataset and support frequently used queries. Their values should remain consistent with the underlying lesson activity.
+Attributes such as `total_xp`, `daily_activity.xp`, and `weekly_xp` are retained as stored summaries for the existing workload. These values must remain consistent with the underlying activity records.
 
-## 6. Data Validation
+## 8. Data Integrity Checks
 
-Data validation checks whether the schema correctly stores the provided CSV records and maintains the required relationships.
+The following checks are used to validate the loaded database:
 
-### Expected Row Counts
+| Check | Purpose | Execution Result |
+|---|---|---|
+| Row-count verification | Confirm that all CSV records were loaded | Pending |
+| Foreign-key verification | Identify invalid references between tables | Pending |
+| Enrollment consistency | Check that lesson attempts correspond to enrolled courses | Pending |
+| Daily XP comparison | Compare daily XP totals with lesson-attempt records | Pending |
 
-| Table | Rows |
-|---|---:|
-| `languages` | 10 |
-| `courses` | 11 |
-| `units` | 220 |
-| `lessons` | 1,760 |
-| `learners` | 30,000 |
-| `enrollments` | 37,500 |
-| `lesson_attempts` | 188,300 |
-| `daily_activity` | 189,109 |
-| `league_memberships` | 28,598 |
-| `achievements` | 10 |
-| `learner_achievements` | 38,860 |
+The source dataset contains 11 CSV files. Loaded row counts must be compared with the original files.
 
-### Integrity Checks
+The actual PostgreSQL query results, including any inconsistencies, will be documented after executing the schema and data-loading scripts.
 
-The following checks will be performed after loading the CSV files:
+## 9. Workload Support
 
-1. **Row counts:** Verify that the number of records matches the source files.
-2. **Foreign keys:** Check for records referencing missing learners, courses or lessons.
-3. **Enrollment consistency:** Check whether lesson attempts belong to courses in which learners are enrolled.
-4. **Daily XP:** Compare recorded daily XP with lesson-attempt XP.
+The database design supports the seven main problem areas in the SQL workload.
 
-**Validation status:** Pending PostgreSQL execution. The actual results and any inconsistencies will be documented after data loading.
+| Problem | Schema Support |
+|---|---|
+| P1 — Learner Home Screen | Course progress, daily XP, streak activity, and lesson information |
+| P2 — Leaderboards | Weekly XP, league tiers, rankings, and outcomes |
+| P3 — Lesson Progress | Lesson attempts, completion status, and XP updates |
+| P4 — Curriculum Analytics | Lesson performance, mistakes, abandoned attempts, and hearts lost |
+| P5 — Referral Queries | Learner referral relationships and identification of non-referring learners |
+| P6 — Activity Reports | Daily active learners, course popularity, XP trends, and learner activity |
+| P7 — Account and Support Operations | Learner profiles, subscriptions, achievements, and account-related searches |
 
-## 7. ER Diagram
+The original SQL queries remain unchanged during the initial schema implementation.
 
-The ER diagram represents the 11 tables, their primary and foreign keys, and the relationships between them.
+## 10. ER Diagram
 
-The main course structure is:
+The ER diagram represents all 11 tables and their relationships, including primary keys, foreign keys, and cardinality.
+
+The main course hierarchy is:
 
 `Languages → Courses → Units → Lessons`
 
-Learner-related tables are connected using `learner_id`. The `enrollments` and `learner_achievements` tables represent many-to-many relationships.
+Learner-related tables connect through `learner_id`, while `enrollments` and `learner_achievements` represent many-to-many relationships.
 
-**Diagram location:** `diagrams/er_diagram.*`
+**File location:** `diagrams/er_diagram.*`
 
-The final diagram will be added after confirming the SQL schema.
+## 11. Conclusion
 
-## 8. Indexing
+The Duolingo database schema organises course content, learner information, learning activity, and achievements into 11 related tables.
 
-The initial schema uses only indexes automatically created by PRIMARY KEY and UNIQUE constraints.
-
-Additional indexes are excluded from this phase so that baseline query performance can be measured before optimization.
-
-## 9. Conclusion
-
-The Duolingo database schema contains 11 relational tables with defined keys, relationships, data types and integrity constraints.
-
-The design maintains referential integrity, reduces unnecessary duplication and supports the existing SQL workload. Final validation will be completed through PostgreSQL data loading and integrity checks.
+The design uses appropriate keys, relationships, and integrity constraints to maintain data consistency while supporting the existing SQL workload.
