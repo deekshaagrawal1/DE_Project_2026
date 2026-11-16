@@ -1,0 +1,111 @@
+erDiagram
+    languages {
+        VARCHAR_2 language_code PK
+        VARCHAR_60 language_name UK
+    }
+
+    courses {
+        INTEGER course_id PK
+        VARCHAR_2 from_lang FK
+        VARCHAR_2 learning_lang FK
+        VARCHAR_150 title
+        DATE launched_on
+    }
+
+    units {
+        INTEGER unit_id PK
+        INTEGER course_id FK
+        SMALLINT unit_no
+        VARCHAR_150 title
+        VARCHAR_2 cefr_level
+    }
+
+    lessons {
+        INTEGER lesson_id PK
+        INTEGER unit_id FK
+        SMALLINT lesson_no
+        VARCHAR_12 lesson_type
+        SMALLINT xp_value
+    }
+
+    learners {
+        INTEGER learner_id PK
+        VARCHAR_100 username UK
+        VARCHAR_254 email UK
+        VARCHAR_2 country_code
+        SMALLINT daily_goal_xp
+        VARCHAR_10 subscription
+        INTEGER referred_by FK
+        TIMESTAMPTZ joined_at
+    }
+
+    achievements {
+        INTEGER achievement_id PK
+        VARCHAR_40 code UK
+        VARCHAR_100 name
+    }
+
+    enrollments {
+        INTEGER learner_id PK, FK
+        INTEGER course_id PK, FK
+        TIMESTAMPTZ enrolled_at
+        INTEGER total_xp
+        BOOLEAN is_active
+    }
+
+    lesson_attempts {
+        INTEGER attempt_id PK
+        INTEGER learner_id FK
+        INTEGER lesson_id FK
+        TIMESTAMPTZ started_at
+        TIMESTAMPTZ completed_at
+        SMALLINT mistakes
+        SMALLINT hearts_lost
+        SMALLINT xp_earned
+        BOOLEAN is_perfect
+        VARCHAR_10 device
+    }
+
+    daily_activity {
+        INTEGER learner_id PK, FK
+        DATE activity_date PK
+        INTEGER xp
+        SMALLINT lessons_completed
+        BOOLEAN used_streak_freeze
+    }
+
+    league_memberships {
+        INTEGER learner_id PK, FK
+        DATE week_start PK
+        VARCHAR_12 tier
+        INTEGER cohort_id
+        INTEGER weekly_xp
+        SMALLINT final_rank
+        VARCHAR_10 result
+    }
+
+    learner_achievements {
+        INTEGER learner_id PK, FK
+        INTEGER achievement_id PK, FK
+        TIMESTAMPTZ earned_at
+    }
+
+    languages ||--o{ courses : "source language"
+    languages ||--o{ courses : "learning language"
+
+    courses ||--o{ units : contains
+    units ||--o{ lessons : contains
+
+    learners ||--o{ enrollments : enrolls
+    courses ||--o{ enrollments : has
+
+    learners ||--o{ lesson_attempts : makes
+    lessons ||--o{ lesson_attempts : receives
+
+    learners ||--o{ daily_activity : records
+    learners ||--o{ league_memberships : joins
+
+    learners ||--o{ learner_achievements : earns
+    achievements ||--o{ learner_achievements : awarded
+
+    learners |o--o{ learners : refers
