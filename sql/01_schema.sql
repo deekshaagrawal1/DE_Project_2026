@@ -198,3 +198,14 @@ CREATE TABLE learner_achievements (
     earned_at TIMESTAMPTZ NOT NULL,
     PRIMARY KEY (learner_id, achievement_id)
 );
+
+
+ALTER TABLE lesson_attempts
+ALTER COLUMN mistakes SET DEFAULT 0,
+ALTER COLUMN hearts_lost SET DEFAULT 0,
+ALTER COLUMN xp_earned SET DEFAULT 0,
+ALTER COLUMN is_perfect SET DEFAULT FALSE;
+
+ALTER TABLE daily_activity
+ALTER COLUMN used_streak_freeze SET DEFAULT FALSE;
+
