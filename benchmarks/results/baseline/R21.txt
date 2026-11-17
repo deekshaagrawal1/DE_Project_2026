@@ -1,0 +1,63 @@
+=== R21 run 1 ===
+GroupAggregate  (cost=0.42..32455.53 rows=8 width=4) (actual time=0.204..2.445 rows=39.00 loops=1)
+  Group Key: d.learner_id
+  Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+  Rows Removed by Filter: 2368
+  Buffers: shared hit=1124
+  ->  Index Only Scan using daily_activity_pkey on daily_activity d  (cost=0.42..4071.13 rows=3562 width=4) (actual time=0.038..2.135 rows=3699.00 loops=1)
+        Index Cond: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=523
+  SubPlan 1
+    ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.000..0.000 rows=0.81 loops=200)
+          Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+          Heap Fetches: 0
+          Index Searches: 200
+          Buffers: shared hit=601
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.226 ms
+Execution Time: 2.476 ms
+=== R21 run 2 ===
+GroupAggregate  (cost=0.42..32455.53 rows=8 width=4) (actual time=0.165..2.155 rows=39.00 loops=1)
+  Group Key: d.learner_id
+  Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+  Rows Removed by Filter: 2368
+  Buffers: shared hit=1124
+  ->  Index Only Scan using daily_activity_pkey on daily_activity d  (cost=0.42..4071.13 rows=3562 width=4) (actual time=0.027..1.847 rows=3699.00 loops=1)
+        Index Cond: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=523
+  SubPlan 1
+    ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.000..0.000 rows=0.81 loops=200)
+          Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+          Heap Fetches: 0
+          Index Searches: 200
+          Buffers: shared hit=601
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.174 ms
+Execution Time: 2.182 ms
+=== R21 run 3 ===
+GroupAggregate  (cost=0.42..32455.53 rows=8 width=4) (actual time=0.164..2.096 rows=39.00 loops=1)
+  Group Key: d.learner_id
+  Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+  Rows Removed by Filter: 2368
+  Buffers: shared hit=1124
+  ->  Index Only Scan using daily_activity_pkey on daily_activity d  (cost=0.42..4071.13 rows=3562 width=4) (actual time=0.028..1.803 rows=3699.00 loops=1)
+        Index Cond: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=523
+  SubPlan 1
+    ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.000..0.000 rows=0.81 loops=200)
+          Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+          Heap Fetches: 0
+          Index Searches: 200
+          Buffers: shared hit=601
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.178 ms
+Execution Time: 2.123 ms
