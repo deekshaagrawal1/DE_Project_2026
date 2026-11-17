@@ -106,10 +106,10 @@ CREATE TABLE lesson_attempts (
         REFERENCES lessons(lesson_id) ON DELETE RESTRICT,
     started_at TIMESTAMPTZ NOT NULL,
     completed_at TIMESTAMPTZ,
-    mistakes SMALLINT NOT NULL,
-    hearts_lost SMALLINT NOT NULL,
-    xp_earned SMALLINT NOT NULL,
-    is_perfect BOOLEAN NOT NULL,
+    mistakes SMALLINT NOT NULL DEFAULT 0,
+    hearts_lost SMALLINT NOT NULL DEFAULT 0,
+    xp_earned SMALLINT NOT NULL DEFAULT 0,
+    is_perfect BOOLEAN NOT NULL DEFAULT false,
     device VARCHAR(10) NOT NULL,
     CONSTRAINT chk_mistakes
         CHECK (mistakes >= 0),
@@ -145,7 +145,7 @@ CREATE TABLE daily_activity (
     activity_date DATE NOT NULL,
     xp INTEGER NOT NULL,
     lessons_completed SMALLINT NOT NULL,
-    used_streak_freeze BOOLEAN NOT NULL,
+    used_streak_freeze BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (learner_id, activity_date),
     CONSTRAINT chk_daily_xp
         CHECK (xp >= 0),
