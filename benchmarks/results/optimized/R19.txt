@@ -1,0 +1,165 @@
+=== R19 run 1 ===
+Sort  (cost=5186.53..5186.93 rows=160 width=48) (actual time=17.095..17.098 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=1809
+  ->  Hash Right Join  (cost=5128.56..5180.67 rows=160 width=48) (actual time=16.774..17.074 rows=160.00 loops=1)
+        Hash Cond: (lesson_attempts.lesson_id = l.lesson_id)
+        Buffers: shared hit=1806
+        ->  HashAggregate  (cost=5087.25..5113.60 rows=1757 width=44) (actual time=16.666..16.903 rows=1760.00 loops=1)
+              Group Key: lesson_attempts.lesson_id
+              Batches: 1  Memory Usage: 337kB
+              Buffers: shared hit=1792
+              ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=14) (actual time=0.002..4.359 rows=188300.00 loops=1)
+                    Buffers: shared hit=1792
+        ->  Hash  (cost=39.31..39.31 rows=160 width=8) (actual time=0.104..0.105 rows=160.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 15kB
+              Buffers: shared hit=14
+              ->  Hash Join  (cost=5.00..39.31 rows=160 width=8) (actual time=0.015..0.098 rows=160.00 loops=1)
+                    Hash Cond: (l.unit_id = u.unit_id)
+                    Buffers: shared hit=14
+                    ->  Seq Scan on lessons l  (cost=0.00..29.60 rows=1760 width=10) (actual time=0.002..0.039 rows=1760.00 loops=1)
+                          Buffers: shared hit=12
+                    ->  Hash  (cost=4.75..4.75 rows=20 width=6) (actual time=0.009..0.009 rows=20.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on units u  (cost=0.00..4.75 rows=20 width=6) (actual time=0.002..0.007 rows=20.00 loops=1)
+                                Filter: (course_id = 1)
+                                Rows Removed by Filter: 200
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=312
+Planning Time: 0.501 ms
+Execution Time: 17.131 ms
+=== R19 run 2 ===
+Sort  (cost=5186.53..5186.93 rows=160 width=48) (actual time=17.581..17.585 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=1809
+  ->  Hash Right Join  (cost=5128.56..5180.67 rows=160 width=48) (actual time=17.254..17.558 rows=160.00 loops=1)
+        Hash Cond: (lesson_attempts.lesson_id = l.lesson_id)
+        Buffers: shared hit=1806
+        ->  HashAggregate  (cost=5087.25..5113.60 rows=1757 width=44) (actual time=17.145..17.386 rows=1760.00 loops=1)
+              Group Key: lesson_attempts.lesson_id
+              Batches: 1  Memory Usage: 337kB
+              Buffers: shared hit=1792
+              ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=14) (actual time=0.002..4.266 rows=188300.00 loops=1)
+                    Buffers: shared hit=1792
+        ->  Hash  (cost=39.31..39.31 rows=160 width=8) (actual time=0.104..0.105 rows=160.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 15kB
+              Buffers: shared hit=14
+              ->  Hash Join  (cost=5.00..39.31 rows=160 width=8) (actual time=0.016..0.098 rows=160.00 loops=1)
+                    Hash Cond: (l.unit_id = u.unit_id)
+                    Buffers: shared hit=14
+                    ->  Seq Scan on lessons l  (cost=0.00..29.60 rows=1760 width=10) (actual time=0.002..0.038 rows=1760.00 loops=1)
+                          Buffers: shared hit=12
+                    ->  Hash  (cost=4.75..4.75 rows=20 width=6) (actual time=0.009..0.009 rows=20.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on units u  (cost=0.00..4.75 rows=20 width=6) (actual time=0.002..0.007 rows=20.00 loops=1)
+                                Filter: (course_id = 1)
+                                Rows Removed by Filter: 200
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=312
+Planning Time: 0.535 ms
+Execution Time: 17.618 ms
+=== R19 run 3 ===
+Sort  (cost=5186.53..5186.93 rows=160 width=48) (actual time=17.492..17.495 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=1809
+  ->  Hash Right Join  (cost=5128.56..5180.67 rows=160 width=48) (actual time=17.162..17.470 rows=160.00 loops=1)
+        Hash Cond: (lesson_attempts.lesson_id = l.lesson_id)
+        Buffers: shared hit=1806
+        ->  HashAggregate  (cost=5087.25..5113.60 rows=1757 width=44) (actual time=17.055..17.297 rows=1760.00 loops=1)
+              Group Key: lesson_attempts.lesson_id
+              Batches: 1  Memory Usage: 337kB
+              Buffers: shared hit=1792
+              ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=14) (actual time=0.002..4.361 rows=188300.00 loops=1)
+                    Buffers: shared hit=1792
+        ->  Hash  (cost=39.31..39.31 rows=160 width=8) (actual time=0.103..0.104 rows=160.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 15kB
+              Buffers: shared hit=14
+              ->  Hash Join  (cost=5.00..39.31 rows=160 width=8) (actual time=0.015..0.097 rows=160.00 loops=1)
+                    Hash Cond: (l.unit_id = u.unit_id)
+                    Buffers: shared hit=14
+                    ->  Seq Scan on lessons l  (cost=0.00..29.60 rows=1760 width=10) (actual time=0.002..0.039 rows=1760.00 loops=1)
+                          Buffers: shared hit=12
+                    ->  Hash  (cost=4.75..4.75 rows=20 width=6) (actual time=0.009..0.009 rows=20.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on units u  (cost=0.00..4.75 rows=20 width=6) (actual time=0.002..0.007 rows=20.00 loops=1)
+                                Filter: (course_id = 1)
+                                Rows Removed by Filter: 200
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=312
+Planning Time: 0.493 ms
+Execution Time: 17.527 ms
+=== R19 run 4 ===
+Sort  (cost=5186.53..5186.93 rows=160 width=48) (actual time=17.168..17.172 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=1809
+  ->  Hash Right Join  (cost=5128.56..5180.67 rows=160 width=48) (actual time=16.856..17.147 rows=160.00 loops=1)
+        Hash Cond: (lesson_attempts.lesson_id = l.lesson_id)
+        Buffers: shared hit=1806
+        ->  HashAggregate  (cost=5087.25..5113.60 rows=1757 width=44) (actual time=16.749..16.980 rows=1760.00 loops=1)
+              Group Key: lesson_attempts.lesson_id
+              Batches: 1  Memory Usage: 337kB
+              Buffers: shared hit=1792
+              ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=14) (actual time=0.002..4.320 rows=188300.00 loops=1)
+                    Buffers: shared hit=1792
+        ->  Hash  (cost=39.31..39.31 rows=160 width=8) (actual time=0.103..0.103 rows=160.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 15kB
+              Buffers: shared hit=14
+              ->  Hash Join  (cost=5.00..39.31 rows=160 width=8) (actual time=0.015..0.097 rows=160.00 loops=1)
+                    Hash Cond: (l.unit_id = u.unit_id)
+                    Buffers: shared hit=14
+                    ->  Seq Scan on lessons l  (cost=0.00..29.60 rows=1760 width=10) (actual time=0.002..0.038 rows=1760.00 loops=1)
+                          Buffers: shared hit=12
+                    ->  Hash  (cost=4.75..4.75 rows=20 width=6) (actual time=0.009..0.009 rows=20.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on units u  (cost=0.00..4.75 rows=20 width=6) (actual time=0.002..0.006 rows=20.00 loops=1)
+                                Filter: (course_id = 1)
+                                Rows Removed by Filter: 200
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=312
+Planning Time: 0.496 ms
+Execution Time: 17.202 ms
+=== R19 run 5 ===
+Sort  (cost=5186.53..5186.93 rows=160 width=48) (actual time=17.715..17.719 rows=160.00 loops=1)
+  Sort Key: u.unit_no, l.lesson_no
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=1809
+  ->  Hash Right Join  (cost=5128.56..5180.67 rows=160 width=48) (actual time=17.380..17.693 rows=160.00 loops=1)
+        Hash Cond: (lesson_attempts.lesson_id = l.lesson_id)
+        Buffers: shared hit=1806
+        ->  HashAggregate  (cost=5087.25..5113.60 rows=1757 width=44) (actual time=17.271..17.524 rows=1760.00 loops=1)
+              Group Key: lesson_attempts.lesson_id
+              Batches: 1  Memory Usage: 337kB
+              Buffers: shared hit=1792
+              ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=14) (actual time=0.002..4.241 rows=188300.00 loops=1)
+                    Buffers: shared hit=1792
+        ->  Hash  (cost=39.31..39.31 rows=160 width=8) (actual time=0.104..0.104 rows=160.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 15kB
+              Buffers: shared hit=14
+              ->  Hash Join  (cost=5.00..39.31 rows=160 width=8) (actual time=0.015..0.098 rows=160.00 loops=1)
+                    Hash Cond: (l.unit_id = u.unit_id)
+                    Buffers: shared hit=14
+                    ->  Seq Scan on lessons l  (cost=0.00..29.60 rows=1760 width=10) (actual time=0.002..0.037 rows=1760.00 loops=1)
+                          Buffers: shared hit=12
+                    ->  Hash  (cost=4.75..4.75 rows=20 width=6) (actual time=0.009..0.009 rows=20.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on units u  (cost=0.00..4.75 rows=20 width=6) (actual time=0.002..0.007 rows=20.00 loops=1)
+                                Filter: (course_id = 1)
+                                Rows Removed by Filter: 200
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=312
+Planning Time: 0.485 ms
+Execution Time: 17.750 ms

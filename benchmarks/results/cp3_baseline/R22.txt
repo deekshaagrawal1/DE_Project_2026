@@ -1,0 +1,65 @@
+=== R22 run 1 ===
+Limit  (cost=24286.60..24286.66 rows=25 width=22) (actual time=30.055..30.057 rows=25.00 loops=1)
+  Buffers: shared hit=1795, temp read=651 written=835
+  ->  Sort  (cost=24036.60..24507.35 rows=188300 width=22) (actual time=25.755..28.286 rows=100025.00 loops=1)
+        Sort Key: started_at DESC
+        Sort Method: external merge  Disk: 6648kB
+        Buffers: shared hit=1795, temp read=651 written=835
+        ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=22) (actual time=0.004..8.943 rows=188300.00 loops=1)
+              Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.135 ms
+Execution Time: 31.210 ms
+=== R22 run 2 ===
+Limit  (cost=24286.60..24286.66 rows=25 width=22) (actual time=30.534..30.535 rows=25.00 loops=1)
+  Buffers: shared hit=1795, temp read=651 written=835
+  ->  Sort  (cost=24036.60..24507.35 rows=188300 width=22) (actual time=26.246..28.769 rows=100025.00 loops=1)
+        Sort Key: started_at DESC
+        Sort Method: external merge  Disk: 6648kB
+        Buffers: shared hit=1795, temp read=651 written=835
+        ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=22) (actual time=0.004..9.094 rows=188300.00 loops=1)
+              Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.141 ms
+Execution Time: 31.697 ms
+=== R22 run 3 ===
+Limit  (cost=24286.60..24286.66 rows=25 width=22) (actual time=31.107..31.109 rows=25.00 loops=1)
+  Buffers: shared hit=1795, temp read=651 written=835
+  ->  Sort  (cost=24036.60..24507.35 rows=188300 width=22) (actual time=26.834..29.382 rows=100025.00 loops=1)
+        Sort Key: started_at DESC
+        Sort Method: external merge  Disk: 6648kB
+        Buffers: shared hit=1795, temp read=651 written=835
+        ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=22) (actual time=0.003..8.837 rows=188300.00 loops=1)
+              Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.128 ms
+Execution Time: 32.250 ms
+=== R22 run 4 ===
+Limit  (cost=24286.60..24286.66 rows=25 width=22) (actual time=30.684..30.686 rows=25.00 loops=1)
+  Buffers: shared hit=1795, temp read=651 written=835
+  ->  Sort  (cost=24036.60..24507.35 rows=188300 width=22) (actual time=26.380..28.920 rows=100025.00 loops=1)
+        Sort Key: started_at DESC
+        Sort Method: external merge  Disk: 6648kB
+        Buffers: shared hit=1795, temp read=651 written=835
+        ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=22) (actual time=0.003..9.054 rows=188300.00 loops=1)
+              Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.145 ms
+Execution Time: 31.834 ms
+=== R22 run 5 ===
+Limit  (cost=24286.60..24286.66 rows=25 width=22) (actual time=30.664..30.666 rows=25.00 loops=1)
+  Buffers: shared hit=1795, temp read=651 written=835
+  ->  Sort  (cost=24036.60..24507.35 rows=188300 width=22) (actual time=26.349..28.919 rows=100025.00 loops=1)
+        Sort Key: started_at DESC
+        Sort Method: external merge  Disk: 6648kB
+        Buffers: shared hit=1795, temp read=651 written=835
+        ->  Seq Scan on lesson_attempts  (cost=0.00..3675.00 rows=188300 width=22) (actual time=0.004..9.074 rows=188300.00 loops=1)
+              Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.134 ms
+Execution Time: 31.822 ms

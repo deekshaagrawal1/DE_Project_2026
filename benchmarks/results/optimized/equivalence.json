@@ -1,0 +1,152 @@
+{
+  "R01": {
+    "original_rows": 160,
+    "optimized_rows": 160,
+    "difference_rows": 0
+  },
+  "R02": {
+    "original_rows": 1,
+    "optimized_rows": 1,
+    "difference_rows": 0
+  },
+  "R03": {
+    "original_rows": 1,
+    "optimized_rows": 1,
+    "difference_rows": 0
+  },
+  "R04": {
+    "original_rows": 1,
+    "optimized_rows": 1,
+    "difference_rows": 0,
+    "ordered_sha256": "5224a57ebbe33c023c3314b1f68e0fe885c6e0df62aadbfe06fffda887ddc09b"
+  },
+  "R05": {
+    "original_rows": 30,
+    "optimized_rows": 30,
+    "difference_rows": 0
+  },
+  "R06": {
+    "original_rows": 1,
+    "optimized_rows": 1,
+    "difference_rows": 0
+  },
+  "R07": {
+    "original_rows": 20,
+    "optimized_rows": 20,
+    "difference_rows": 0
+  },
+  "R08": {
+    "original_rows": 4,
+    "optimized_rows": 4,
+    "difference_rows": 0
+  },
+  "R09": {
+    "original_rows": 30,
+    "optimized_rows": 30,
+    "difference_rows": 0
+  },
+  "R10": {
+    "original_rows": 2,
+    "optimized_rows": 2,
+    "difference_rows": 0
+  },
+  "R11": {
+    "original_rows": 1,
+    "optimized_rows": 1,
+    "difference_rows": 0
+  },
+  "R12": {
+    "original_rows": 4,
+    "optimized_rows": 4,
+    "difference_rows": 0
+  },
+  "R13": {
+    "original_rows": 24268,
+    "optimized_rows": 24268,
+    "difference_rows": 0,
+    "canonical_buggy_rows": 0,
+    "intentional_correctness_fix": true
+  },
+  "R14": {
+    "original_rows": 8,
+    "optimized_rows": 8,
+    "difference_rows": 0
+  },
+  "R15": {
+    "original_rows": 1,
+    "optimized_rows": 1,
+    "difference_rows": 0
+  },
+  "R16": {
+    "original_rows": 20,
+    "optimized_rows": 20,
+    "difference_rows": 0
+  },
+  "R17": {
+    "original_rows": 3,
+    "optimized_rows": 3,
+    "difference_rows": 0
+  },
+  "R18": {
+    "original_rows": 11,
+    "optimized_rows": 11,
+    "difference_rows": 0
+  },
+  "R19": {
+    "original_rows": 160,
+    "optimized_rows": 160,
+    "difference_rows": 0,
+    "ordered_sha256": "1b9518fb3d04916a225d64bf383329e0e210a9b36d45a18a38d682484ebf5c8b"
+  },
+  "R20": {
+    "original_rows": 30,
+    "optimized_rows": 30,
+    "difference_rows": 0,
+    "ordered_sha256": "9cbf7b06b2c6e9dd4f5d00572848ace356916f8f58daac04a9d5b2052a3d3c29"
+  },
+  "R21": {
+    "original_rows": 39,
+    "optimized_rows": 39,
+    "difference_rows": 0
+  },
+  "R22": {
+    "original_rows": 25,
+    "optimized_rows": 25,
+    "difference_rows": 0
+  },
+  "R23": {
+    "original_rows": 2,
+    "optimized_rows": 2,
+    "difference_rows": 0
+  },
+  "R24": {
+    "original_rows": 5,
+    "optimized_rows": 5,
+    "difference_rows": 0
+  },
+  "R25": {
+    "original_rows": 120,
+    "optimized_rows": 120,
+    "difference_rows": 0
+  },
+  "W01": {
+    "sql_unchanged": true,
+    "measurement": "BEGIN / EXPLAIN ANALYZE / ROLLBACK per run"
+  },
+  "W02": {
+    "sql_unchanged": true,
+    "measurement": "BEGIN / EXPLAIN ANALYZE / ROLLBACK per run"
+  },
+  "W03": {
+    "sql_unchanged": true,
+    "measurement": "BEGIN / EXPLAIN ANALYZE / ROLLBACK per run"
+  },
+  "W04": {
+    "sql_unchanged": true,
+    "measurement": "BEGIN / EXPLAIN ANALYZE / ROLLBACK per run"
+  },
+  "W05": {
+    "sql_unchanged": true,
+    "measurement": "BEGIN / EXPLAIN ANALYZE / ROLLBACK per run"
+  }
+}

@@ -1,0 +1,75 @@
+=== R13 run 1 ===
+Merge Anti Join  (cost=0.58..1410.66 rows=24268 width=21) (actual time=0.068..3.193 rows=24268.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=474
+  ->  Index Scan using learners_pkey on learners l  (cost=0.29..1157.29 rows=30000 width=21) (actual time=0.003..1.454 rows=30000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=451
+  ->  Index Only Scan using idx_learner_referral on learners r  (cost=0.29..225.76 rows=30000 width=4) (actual time=0.005..0.255 rows=8898.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=23
+Planning:
+  Buffers: shared hit=252
+Planning Time: 0.352 ms
+Execution Time: 3.599 ms
+=== R13 run 2 ===
+Merge Anti Join  (cost=0.58..1410.66 rows=24268 width=21) (actual time=0.066..3.057 rows=24268.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=474
+  ->  Index Scan using learners_pkey on learners l  (cost=0.29..1157.29 rows=30000 width=21) (actual time=0.003..1.381 rows=30000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=451
+  ->  Index Only Scan using idx_learner_referral on learners r  (cost=0.29..225.76 rows=30000 width=4) (actual time=0.005..0.259 rows=8898.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=23
+Planning:
+  Buffers: shared hit=252
+Planning Time: 0.325 ms
+Execution Time: 3.460 ms
+=== R13 run 3 ===
+Merge Anti Join  (cost=0.58..1410.66 rows=24268 width=21) (actual time=0.065..3.057 rows=24268.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=474
+  ->  Index Scan using learners_pkey on learners l  (cost=0.29..1157.29 rows=30000 width=21) (actual time=0.003..1.358 rows=30000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=451
+  ->  Index Only Scan using idx_learner_referral on learners r  (cost=0.29..225.76 rows=30000 width=4) (actual time=0.004..0.243 rows=8898.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=23
+Planning:
+  Buffers: shared hit=252
+Planning Time: 0.315 ms
+Execution Time: 3.460 ms
+=== R13 run 4 ===
+Merge Anti Join  (cost=0.58..1410.66 rows=24268 width=21) (actual time=0.065..3.046 rows=24268.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=474
+  ->  Index Scan using learners_pkey on learners l  (cost=0.29..1157.29 rows=30000 width=21) (actual time=0.003..1.381 rows=30000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=451
+  ->  Index Only Scan using idx_learner_referral on learners r  (cost=0.29..225.76 rows=30000 width=4) (actual time=0.004..0.247 rows=8898.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=23
+Planning:
+  Buffers: shared hit=252
+Planning Time: 0.316 ms
+Execution Time: 3.455 ms
+=== R13 run 5 ===
+Merge Anti Join  (cost=0.58..1410.66 rows=24268 width=21) (actual time=0.064..3.069 rows=24268.00 loops=1)
+  Merge Cond: (l.learner_id = r.referred_by)
+  Buffers: shared hit=474
+  ->  Index Scan using learners_pkey on learners l  (cost=0.29..1157.29 rows=30000 width=21) (actual time=0.003..1.404 rows=30000.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=451
+  ->  Index Only Scan using idx_learner_referral on learners r  (cost=0.29..225.76 rows=30000 width=4) (actual time=0.004..0.247 rows=8898.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=23
+Planning:
+  Buffers: shared hit=252
+Planning Time: 0.309 ms
+Execution Time: 3.479 ms

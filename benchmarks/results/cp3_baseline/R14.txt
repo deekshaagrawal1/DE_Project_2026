@@ -1,0 +1,85 @@
+=== R14 run 1 ===
+Sort  (cost=836.65..836.67 rows=8 width=79) (actual time=1.745..1.745 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=267
+  ->  HashAggregate  (cost=836.25..836.53 rows=8 width=79) (actual time=1.734..1.737 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=264
+        ->  Seq Scan on league_memberships  (cost=0.00..692.97 rows=9552 width=14) (actual time=0.004..0.894 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=264
+Planning:
+  Buffers: shared hit=113
+Planning Time: 0.158 ms
+Execution Time: 1.769 ms
+=== R14 run 2 ===
+Sort  (cost=836.65..836.67 rows=8 width=79) (actual time=1.717..1.718 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=267
+  ->  HashAggregate  (cost=836.25..836.53 rows=8 width=79) (actual time=1.709..1.711 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=264
+        ->  Seq Scan on league_memberships  (cost=0.00..692.97 rows=9552 width=14) (actual time=0.003..0.870 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=264
+Planning:
+  Buffers: shared hit=113
+Planning Time: 0.147 ms
+Execution Time: 1.740 ms
+=== R14 run 3 ===
+Sort  (cost=836.65..836.67 rows=8 width=79) (actual time=1.696..1.696 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=267
+  ->  HashAggregate  (cost=836.25..836.53 rows=8 width=79) (actual time=1.688..1.690 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=264
+        ->  Seq Scan on league_memberships  (cost=0.00..692.97 rows=9552 width=14) (actual time=0.003..0.866 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=264
+Planning:
+  Buffers: shared hit=113
+Planning Time: 0.140 ms
+Execution Time: 1.717 ms
+=== R14 run 4 ===
+Sort  (cost=836.65..836.67 rows=8 width=79) (actual time=1.720..1.720 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=267
+  ->  HashAggregate  (cost=836.25..836.53 rows=8 width=79) (actual time=1.711..1.713 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=264
+        ->  Seq Scan on league_memberships  (cost=0.00..692.97 rows=9552 width=14) (actual time=0.004..0.870 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=264
+Planning:
+  Buffers: shared hit=113
+Planning Time: 0.152 ms
+Execution Time: 1.742 ms
+=== R14 run 5 ===
+Sort  (cost=836.65..836.67 rows=8 width=79) (actual time=1.769..1.769 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=267
+  ->  HashAggregate  (cost=836.25..836.53 rows=8 width=79) (actual time=1.760..1.763 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=264
+        ->  Seq Scan on league_memberships  (cost=0.00..692.97 rows=9552 width=14) (actual time=0.003..0.896 rows=9552.00 loops=1)
+              Filter: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Rows Removed by Filter: 19046
+              Buffers: shared hit=264
+Planning:
+  Buffers: shared hit=113
+Planning Time: 0.148 ms
+Execution Time: 1.790 ms

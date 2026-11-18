@@ -1,0 +1,50 @@
+=== W01 run 1 ===
+Insert on lesson_attempts  (cost=0.00..0.01 rows=0 width=0) (actual time=0.118..0.119 rows=0.00 loops=1)
+  Buffers: shared hit=56
+  ->  Result  (cost=0.00..0.01 rows=1 width=73) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=12
+Planning Time: 0.036 ms
+Trigger for constraint lesson_attempts_learner_id_fkey: time=0.231 calls=1
+Trigger for constraint lesson_attempts_lesson_id_fkey: time=0.091 calls=1
+Execution Time: 0.449 ms
+=== W01 run 2 ===
+Insert on lesson_attempts  (cost=0.00..0.01 rows=0 width=0) (actual time=0.116..0.117 rows=0.00 loops=1)
+  Buffers: shared hit=57 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=73) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=12
+Planning Time: 0.035 ms
+Trigger for constraint lesson_attempts_learner_id_fkey: time=0.228 calls=1
+Trigger for constraint lesson_attempts_lesson_id_fkey: time=0.090 calls=1
+Execution Time: 0.443 ms
+=== W01 run 3 ===
+Insert on lesson_attempts  (cost=0.00..0.01 rows=0 width=0) (actual time=0.099..0.099 rows=0.00 loops=1)
+  Buffers: shared hit=57 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=73) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=12
+Planning Time: 0.029 ms
+Trigger for constraint lesson_attempts_learner_id_fkey: time=0.193 calls=1
+Trigger for constraint lesson_attempts_lesson_id_fkey: time=0.082 calls=1
+Execution Time: 0.382 ms
+=== W01 run 4 ===
+Insert on lesson_attempts  (cost=0.00..0.01 rows=0 width=0) (actual time=0.099..0.099 rows=0.00 loops=1)
+  Buffers: shared hit=57 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=73) (actual time=0.001..0.001 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=12
+Planning Time: 0.028 ms
+Trigger for constraint lesson_attempts_learner_id_fkey: time=0.197 calls=1
+Trigger for constraint lesson_attempts_lesson_id_fkey: time=0.081 calls=1
+Execution Time: 0.383 ms
+=== W01 run 5 ===
+Insert on lesson_attempts  (cost=0.00..0.01 rows=0 width=0) (actual time=0.100..0.100 rows=0.00 loops=1)
+  Buffers: shared hit=57 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=73) (actual time=0.001..0.002 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=12
+Planning Time: 0.029 ms
+Trigger for constraint lesson_attempts_learner_id_fkey: time=0.196 calls=1
+Trigger for constraint lesson_attempts_lesson_id_fkey: time=0.084 calls=1
+Execution Time: 0.388 ms

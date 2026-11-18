@@ -1,0 +1,105 @@
+=== R14 run 1 ===
+Sort  (cost=779.16..779.18 rows=8 width=79) (actual time=1.522..1.522 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=280
+  ->  HashAggregate  (cost=778.76..779.04 rows=8 width=79) (actual time=1.511..1.513 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=277
+        ->  Bitmap Heap Scan on league_memberships  (cost=254.20..635.48 rows=9552 width=14) (actual time=0.175..0.666 rows=9552.00 loops=1)
+              Recheck Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Heap Blocks: exact=238
+              Buffers: shared hit=277
+              ->  Bitmap Index Scan on idx_league_week_cohort  (cost=0.00..251.81 rows=9552 width=0) (actual time=0.161..0.161 rows=9552.00 loops=1)
+                    Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                    Index Searches: 1
+                    Buffers: shared hit=39
+Planning:
+  Buffers: shared hit=149
+Planning Time: 0.196 ms
+Execution Time: 1.548 ms
+=== R14 run 2 ===
+Sort  (cost=779.16..779.18 rows=8 width=79) (actual time=1.460..1.461 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=280
+  ->  HashAggregate  (cost=778.76..779.04 rows=8 width=79) (actual time=1.450..1.453 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=277
+        ->  Bitmap Heap Scan on league_memberships  (cost=254.20..635.48 rows=9552 width=14) (actual time=0.165..0.624 rows=9552.00 loops=1)
+              Recheck Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Heap Blocks: exact=238
+              Buffers: shared hit=277
+              ->  Bitmap Index Scan on idx_league_week_cohort  (cost=0.00..251.81 rows=9552 width=0) (actual time=0.152..0.152 rows=9552.00 loops=1)
+                    Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                    Index Searches: 1
+                    Buffers: shared hit=39
+Planning:
+  Buffers: shared hit=149
+Planning Time: 0.177 ms
+Execution Time: 1.483 ms
+=== R14 run 3 ===
+Sort  (cost=779.16..779.18 rows=8 width=79) (actual time=1.463..1.463 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=280
+  ->  HashAggregate  (cost=778.76..779.04 rows=8 width=79) (actual time=1.453..1.455 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=277
+        ->  Bitmap Heap Scan on league_memberships  (cost=254.20..635.48 rows=9552 width=14) (actual time=0.163..0.621 rows=9552.00 loops=1)
+              Recheck Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Heap Blocks: exact=238
+              Buffers: shared hit=277
+              ->  Bitmap Index Scan on idx_league_week_cohort  (cost=0.00..251.81 rows=9552 width=0) (actual time=0.149..0.149 rows=9552.00 loops=1)
+                    Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                    Index Searches: 1
+                    Buffers: shared hit=39
+Planning:
+  Buffers: shared hit=149
+Planning Time: 0.180 ms
+Execution Time: 1.487 ms
+=== R14 run 4 ===
+Sort  (cost=779.16..779.18 rows=8 width=79) (actual time=1.463..1.464 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=280
+  ->  HashAggregate  (cost=778.76..779.04 rows=8 width=79) (actual time=1.452..1.455 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=277
+        ->  Bitmap Heap Scan on league_memberships  (cost=254.20..635.48 rows=9552 width=14) (actual time=0.163..0.619 rows=9552.00 loops=1)
+              Recheck Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Heap Blocks: exact=238
+              Buffers: shared hit=277
+              ->  Bitmap Index Scan on idx_league_week_cohort  (cost=0.00..251.81 rows=9552 width=0) (actual time=0.150..0.150 rows=9552.00 loops=1)
+                    Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                    Index Searches: 1
+                    Buffers: shared hit=39
+Planning:
+  Buffers: shared hit=149
+Planning Time: 0.175 ms
+Execution Time: 1.487 ms
+=== R14 run 5 ===
+Sort  (cost=779.16..779.18 rows=8 width=79) (actual time=1.429..1.429 rows=8.00 loops=1)
+  Sort Key: tier
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=280
+  ->  HashAggregate  (cost=778.76..779.04 rows=8 width=79) (actual time=1.419..1.421 rows=8.00 loops=1)
+        Group Key: tier
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=277
+        ->  Bitmap Heap Scan on league_memberships  (cost=254.20..635.48 rows=9552 width=14) (actual time=0.166..0.615 rows=9552.00 loops=1)
+              Recheck Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+              Heap Blocks: exact=238
+              Buffers: shared hit=277
+              ->  Bitmap Index Scan on idx_league_week_cohort  (cost=0.00..251.81 rows=9552 width=0) (actual time=0.152..0.152 rows=9552.00 loops=1)
+                    Index Cond: ((week_start >= '2026-06-01'::date) AND (week_start <= '2026-06-22'::date))
+                    Index Searches: 1
+                    Buffers: shared hit=39
+Planning:
+  Buffers: shared hit=149
+Planning Time: 0.175 ms
+Execution Time: 1.452 ms

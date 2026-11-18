@@ -1,0 +1,125 @@
+=== R21 run 1 ===
+Sort  (cost=33139.90..33139.93 rows=9 width=4) (actual time=4.763..4.764 rows=39.00 loops=1)
+  Sort Key: d.learner_id
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1820
+  ->  HashAggregate  (cost=3911.01..33139.76 rows=9 width=4) (actual time=4.527..4.755 rows=39.00 loops=1)
+        Group Key: d.learner_id
+        Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+        Batches: 1  Memory Usage: 217kB
+        Rows Removed by Filter: 2368
+        Buffers: shared hit=1817
+        ->  Seq Scan on daily_activity d  (cost=0.00..3892.63 rows=3676 width=4) (actual time=0.005..4.283 rows=3699.00 loops=1)
+              Filter: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+              Rows Removed by Filter: 185410
+              Buffers: shared hit=1056
+        SubPlan 1
+          ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.001..0.001 rows=0.81 loops=200)
+                Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+                Heap Fetches: 161
+                Index Searches: 200
+                Buffers: shared hit=761
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.184 ms
+Execution Time: 4.796 ms
+=== R21 run 2 ===
+Sort  (cost=33139.90..33139.93 rows=9 width=4) (actual time=5.288..5.289 rows=39.00 loops=1)
+  Sort Key: d.learner_id
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1820
+  ->  HashAggregate  (cost=3911.01..33139.76 rows=9 width=4) (actual time=5.081..5.281 rows=39.00 loops=1)
+        Group Key: d.learner_id
+        Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+        Batches: 1  Memory Usage: 217kB
+        Rows Removed by Filter: 2368
+        Buffers: shared hit=1817
+        ->  Seq Scan on daily_activity d  (cost=0.00..3892.63 rows=3676 width=4) (actual time=0.005..4.849 rows=3699.00 loops=1)
+              Filter: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+              Rows Removed by Filter: 185410
+              Buffers: shared hit=1056
+        SubPlan 1
+          ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.001..0.001 rows=0.81 loops=200)
+                Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+                Heap Fetches: 161
+                Index Searches: 200
+                Buffers: shared hit=761
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.157 ms
+Execution Time: 5.318 ms
+=== R21 run 3 ===
+Sort  (cost=33139.90..33139.93 rows=9 width=4) (actual time=5.272..5.273 rows=39.00 loops=1)
+  Sort Key: d.learner_id
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1820
+  ->  HashAggregate  (cost=3911.01..33139.76 rows=9 width=4) (actual time=5.057..5.265 rows=39.00 loops=1)
+        Group Key: d.learner_id
+        Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+        Batches: 1  Memory Usage: 217kB
+        Rows Removed by Filter: 2368
+        Buffers: shared hit=1817
+        ->  Seq Scan on daily_activity d  (cost=0.00..3892.63 rows=3676 width=4) (actual time=0.005..4.811 rows=3699.00 loops=1)
+              Filter: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+              Rows Removed by Filter: 185410
+              Buffers: shared hit=1056
+        SubPlan 1
+          ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.001..0.001 rows=0.81 loops=200)
+                Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+                Heap Fetches: 161
+                Index Searches: 200
+                Buffers: shared hit=761
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.155 ms
+Execution Time: 5.302 ms
+=== R21 run 4 ===
+Sort  (cost=33139.90..33139.93 rows=9 width=4) (actual time=5.321..5.322 rows=39.00 loops=1)
+  Sort Key: d.learner_id
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1820
+  ->  HashAggregate  (cost=3911.01..33139.76 rows=9 width=4) (actual time=5.095..5.314 rows=39.00 loops=1)
+        Group Key: d.learner_id
+        Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+        Batches: 1  Memory Usage: 217kB
+        Rows Removed by Filter: 2368
+        Buffers: shared hit=1817
+        ->  Seq Scan on daily_activity d  (cost=0.00..3892.63 rows=3676 width=4) (actual time=0.005..4.853 rows=3699.00 loops=1)
+              Filter: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+              Rows Removed by Filter: 185410
+              Buffers: shared hit=1056
+        SubPlan 1
+          ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.001..0.001 rows=0.81 loops=200)
+                Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+                Heap Fetches: 161
+                Index Searches: 200
+                Buffers: shared hit=761
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.158 ms
+Execution Time: 5.351 ms
+=== R21 run 5 ===
+Sort  (cost=33139.90..33139.93 rows=9 width=4) (actual time=6.651..6.652 rows=39.00 loops=1)
+  Sort Key: d.learner_id
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1820
+  ->  HashAggregate  (cost=3911.01..33139.76 rows=9 width=4) (actual time=6.442..6.644 rows=39.00 loops=1)
+        Group Key: d.learner_id
+        Filter: ((count(*) = 7) AND (NOT EXISTS(SubPlan 1)))
+        Batches: 1  Memory Usage: 217kB
+        Rows Removed by Filter: 2368
+        Buffers: shared hit=1817
+        ->  Seq Scan on daily_activity d  (cost=0.00..3892.63 rows=3676 width=4) (actual time=0.006..6.199 rows=3699.00 loops=1)
+              Filter: ((activity_date >= '2026-06-23'::date) AND (activity_date <= '2026-06-29'::date))
+              Rows Removed by Filter: 185410
+              Buffers: shared hit=1056
+        SubPlan 1
+          ->  Index Only Scan using daily_activity_pkey on daily_activity t  (cost=0.42..8.44 rows=1 width=0) (actual time=0.001..0.001 rows=0.81 loops=200)
+                Index Cond: ((learner_id = d.learner_id) AND (activity_date = '2026-06-30'::date))
+                Heap Fetches: 161
+                Index Searches: 200
+                Buffers: shared hit=761
+Planning:
+  Buffers: shared hit=108
+Planning Time: 0.151 ms
+Execution Time: 6.680 ms

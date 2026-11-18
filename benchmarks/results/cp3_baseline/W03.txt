@@ -1,0 +1,65 @@
+=== W03 run 1 ===
+Insert on daily_activity  (cost=0.00..0.01 rows=0 width=0) (actual time=0.104..0.104 rows=0.00 loops=1)
+  Conflict Resolution: UPDATE
+  Conflict Arbiter Indexes: daily_activity_pkey
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=34
+  ->  Result  (cost=0.00..0.01 rows=1 width=15) (actual time=0.000..0.000 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=41
+Planning Time: 0.049 ms
+Trigger for constraint daily_activity_learner_id_fkey: time=0.230 calls=1
+Execution Time: 0.372 ms
+=== W03 run 2 ===
+Insert on daily_activity  (cost=0.00..0.01 rows=0 width=0) (actual time=0.083..0.084 rows=0.00 loops=1)
+  Conflict Resolution: UPDATE
+  Conflict Arbiter Indexes: daily_activity_pkey
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=35 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=15) (actual time=0.000..0.000 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=41
+Planning Time: 0.043 ms
+Trigger for constraint daily_activity_learner_id_fkey: time=0.189 calls=1
+Execution Time: 0.306 ms
+=== W03 run 3 ===
+Insert on daily_activity  (cost=0.00..0.01 rows=0 width=0) (actual time=0.079..0.079 rows=0.00 loops=1)
+  Conflict Resolution: UPDATE
+  Conflict Arbiter Indexes: daily_activity_pkey
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=35 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=15) (actual time=0.000..0.000 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=41
+Planning Time: 0.042 ms
+Trigger for constraint daily_activity_learner_id_fkey: time=0.179 calls=1
+Execution Time: 0.290 ms
+=== W03 run 4 ===
+Insert on daily_activity  (cost=0.00..0.01 rows=0 width=0) (actual time=0.076..0.076 rows=0.00 loops=1)
+  Conflict Resolution: UPDATE
+  Conflict Arbiter Indexes: daily_activity_pkey
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=35 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=15) (actual time=0.000..0.000 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=41
+Planning Time: 0.041 ms
+Trigger for constraint daily_activity_learner_id_fkey: time=0.180 calls=1
+Execution Time: 0.287 ms
+=== W03 run 5 ===
+Insert on daily_activity  (cost=0.00..0.01 rows=0 width=0) (actual time=0.084..0.084 rows=0.00 loops=1)
+  Conflict Resolution: UPDATE
+  Conflict Arbiter Indexes: daily_activity_pkey
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=35 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=15) (actual time=0.000..0.000 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=41
+Planning Time: 0.043 ms
+Trigger for constraint daily_activity_learner_id_fkey: time=0.186 calls=1
+Execution Time: 0.302 ms
