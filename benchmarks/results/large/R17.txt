@@ -1,0 +1,84 @@
+=== R17 run 1 ===
+Sort  (cost=4481.06..4481.07 rows=3 width=46) (actual time=14.493..14.642 rows=3.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE is_perfect))::numeric) / (count(*))::numeric), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1833
+  ->  Finalize GroupAggregate  (cost=4475.43..4481.03 rows=3 width=46) (actual time=14.218..14.637 rows=3.00 loops=1)
+        Group Key: device
+        Buffers: shared hit=1830
+        ->  Gather Merge  (cost=4475.43..4480.93 rows=5 width=22) (actual time=13.905..14.630 rows=6.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=1830
+              ->  Partial GroupAggregate  (cost=3475.42..3480.36 rows=3 width=22) (actual time=12.627..13.176 rows=3.00 loops=2)
+                    Group Key: device
+                    Buffers: shared hit=1830
+                    ->  Sort  (cost=3475.42..3476.64 rows=491 width=7) (actual time=11.570..12.123 rows=30429.00 loops=2)
+                          Sort Key: device
+                          Sort Method: quicksort  Memory: 1670kB
+                          Buffers: shared hit=1830
+                          Worker 0:  Sort Method: quicksort  Memory: 1604kB
+                          ->  Parallel Seq Scan on lesson_attempts  (cost=0.00..3453.47 rows=491 width=7) (actual time=4.736..8.174 rows=30429.00 loops=2)
+                                Filter: ((completed_at IS NOT NULL) AND (EXTRACT(year FROM started_at) = '2026'::numeric))
+                                Rows Removed by Filter: 63721
+                                Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=109
+Planning Time: 0.170 ms
+Execution Time: 14.673 ms
+=== R17 run 2 ===
+Sort  (cost=4481.06..4481.07 rows=3 width=46) (actual time=14.646..14.662 rows=3.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE is_perfect))::numeric) / (count(*))::numeric), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1833
+  ->  Finalize GroupAggregate  (cost=4475.43..4481.03 rows=3 width=46) (actual time=14.346..14.657 rows=3.00 loops=1)
+        Group Key: device
+        Buffers: shared hit=1830
+        ->  Gather Merge  (cost=4475.43..4480.93 rows=5 width=22) (actual time=14.011..14.650 rows=6.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=1830
+              ->  Partial GroupAggregate  (cost=3475.42..3480.36 rows=3 width=22) (actual time=12.623..13.210 rows=3.00 loops=2)
+                    Group Key: device
+                    Buffers: shared hit=1830
+                    ->  Sort  (cost=3475.42..3476.64 rows=491 width=7) (actual time=11.554..12.111 rows=30429.00 loops=2)
+                          Sort Key: device
+                          Sort Method: quicksort  Memory: 1644kB
+                          Buffers: shared hit=1830
+                          Worker 0:  Sort Method: quicksort  Memory: 1630kB
+                          ->  Parallel Seq Scan on lesson_attempts  (cost=0.00..3453.47 rows=491 width=7) (actual time=4.886..8.370 rows=30429.00 loops=2)
+                                Filter: ((completed_at IS NOT NULL) AND (EXTRACT(year FROM started_at) = '2026'::numeric))
+                                Rows Removed by Filter: 63721
+                                Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=109
+Planning Time: 0.167 ms
+Execution Time: 14.694 ms
+=== R17 run 3 ===
+Sort  (cost=4481.06..4481.07 rows=3 width=46) (actual time=14.428..14.440 rows=3.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE is_perfect))::numeric) / (count(*))::numeric), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1833
+  ->  Finalize GroupAggregate  (cost=4475.43..4481.03 rows=3 width=46) (actual time=14.112..14.436 rows=3.00 loops=1)
+        Group Key: device
+        Buffers: shared hit=1830
+        ->  Gather Merge  (cost=4475.43..4480.93 rows=5 width=22) (actual time=13.808..14.430 rows=6.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=1830
+              ->  Partial GroupAggregate  (cost=3475.42..3480.36 rows=3 width=22) (actual time=12.359..12.953 rows=3.00 loops=2)
+                    Group Key: device
+                    Buffers: shared hit=1830
+                    ->  Sort  (cost=3475.42..3476.64 rows=491 width=7) (actual time=11.270..11.831 rows=30429.00 loops=2)
+                          Sort Key: device
+                          Sort Method: quicksort  Memory: 1614kB
+                          Buffers: shared hit=1830
+                          Worker 0:  Sort Method: quicksort  Memory: 1661kB
+                          ->  Parallel Seq Scan on lesson_attempts  (cost=0.00..3453.47 rows=491 width=7) (actual time=4.661..8.127 rows=30429.00 loops=2)
+                                Filter: ((completed_at IS NOT NULL) AND (EXTRACT(year FROM started_at) = '2026'::numeric))
+                                Rows Removed by Filter: 63721
+                                Buffers: shared hit=1792
+Planning:
+  Buffers: shared hit=109
+Planning Time: 0.185 ms
+Execution Time: 14.472 ms

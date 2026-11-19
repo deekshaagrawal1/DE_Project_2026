@@ -1,0 +1,81 @@
+=== R03 run 1 ===
+Aggregate  (cost=9.02..9.03 rows=1 width=12) (actual time=0.062..0.062 rows=1.00 loops=1)
+  Buffers: shared hit=4
+  CTE days
+    ->  WindowAgg  (cost=1.60..8.70 rows=7 width=8) (actual time=0.043..0.050 rows=39.00 loops=1)
+          Window: w1 AS (ORDER BY daily_activity.activity_date ROWS UNBOUNDED PRECEDING)
+          Storage: Memory  Maximum Storage: 17kB
+          Buffers: shared hit=4
+          ->  Index Only Scan using daily_activity_pkey on daily_activity  (cost=0.42..8.56 rows=7 width=4) (actual time=0.038..0.040 rows=39.00 loops=1)
+                Index Cond: ((learner_id = 1042) AND (activity_date <= '2026-06-30'::date))
+                Heap Fetches: 0
+                Index Searches: 1
+                Buffers: shared hit=4
+  InitPlan 2
+    ->  CTE Scan on days days_1  (cost=0.00..0.16 rows=1 width=4) (actual time=0.011..0.011 rows=1.00 loops=1)
+          Filter: (activity_date = '2026-06-30'::date)
+          Rows Removed by Filter: 38
+          Storage: Memory  Maximum Storage: 18kB
+  ->  CTE Scan on days  (cost=0.00..0.16 rows=1 width=4) (actual time=0.057..0.058 rows=32.00 loops=1)
+        Filter: (grp = (InitPlan 2).col1)
+        Rows Removed by Filter: 7
+        Storage: Memory  Maximum Storage: 18kB
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=99
+Planning Time: 0.220 ms
+Execution Time: 0.100 ms
+=== R03 run 2 ===
+Aggregate  (cost=9.02..9.03 rows=1 width=12) (actual time=0.053..0.053 rows=1.00 loops=1)
+  Buffers: shared hit=4
+  CTE days
+    ->  WindowAgg  (cost=1.60..8.70 rows=7 width=8) (actual time=0.034..0.041 rows=39.00 loops=1)
+          Window: w1 AS (ORDER BY daily_activity.activity_date ROWS UNBOUNDED PRECEDING)
+          Storage: Memory  Maximum Storage: 17kB
+          Buffers: shared hit=4
+          ->  Index Only Scan using daily_activity_pkey on daily_activity  (cost=0.42..8.56 rows=7 width=4) (actual time=0.028..0.030 rows=39.00 loops=1)
+                Index Cond: ((learner_id = 1042) AND (activity_date <= '2026-06-30'::date))
+                Heap Fetches: 0
+                Index Searches: 1
+                Buffers: shared hit=4
+  InitPlan 2
+    ->  CTE Scan on days days_1  (cost=0.00..0.16 rows=1 width=4) (actual time=0.011..0.012 rows=1.00 loops=1)
+          Filter: (activity_date = '2026-06-30'::date)
+          Rows Removed by Filter: 38
+          Storage: Memory  Maximum Storage: 18kB
+  ->  CTE Scan on days  (cost=0.00..0.16 rows=1 width=4) (actual time=0.048..0.049 rows=32.00 loops=1)
+        Filter: (grp = (InitPlan 2).col1)
+        Rows Removed by Filter: 7
+        Storage: Memory  Maximum Storage: 18kB
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=99
+Planning Time: 0.204 ms
+Execution Time: 0.094 ms
+=== R03 run 3 ===
+Aggregate  (cost=9.02..9.03 rows=1 width=12) (actual time=0.045..0.045 rows=1.00 loops=1)
+  Buffers: shared hit=4
+  CTE days
+    ->  WindowAgg  (cost=1.60..8.70 rows=7 width=8) (actual time=0.030..0.036 rows=39.00 loops=1)
+          Window: w1 AS (ORDER BY daily_activity.activity_date ROWS UNBOUNDED PRECEDING)
+          Storage: Memory  Maximum Storage: 17kB
+          Buffers: shared hit=4
+          ->  Index Only Scan using daily_activity_pkey on daily_activity  (cost=0.42..8.56 rows=7 width=4) (actual time=0.026..0.027 rows=39.00 loops=1)
+                Index Cond: ((learner_id = 1042) AND (activity_date <= '2026-06-30'::date))
+                Heap Fetches: 0
+                Index Searches: 1
+                Buffers: shared hit=4
+  InitPlan 2
+    ->  CTE Scan on days days_1  (cost=0.00..0.16 rows=1 width=4) (actual time=0.008..0.009 rows=1.00 loops=1)
+          Filter: (activity_date = '2026-06-30'::date)
+          Rows Removed by Filter: 38
+          Storage: Memory  Maximum Storage: 18kB
+  ->  CTE Scan on days  (cost=0.00..0.16 rows=1 width=4) (actual time=0.041..0.042 rows=32.00 loops=1)
+        Filter: (grp = (InitPlan 2).col1)
+        Rows Removed by Filter: 7
+        Storage: Memory  Maximum Storage: 18kB
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=99
+Planning Time: 0.199 ms
+Execution Time: 0.082 ms
